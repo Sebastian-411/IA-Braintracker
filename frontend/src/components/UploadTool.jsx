@@ -17,7 +17,21 @@ function UploadTool() {
           <input type="file" id="file" name="file" multiple />
         </div>
       </form>
+      <BrainResult isTumorPresent={false} />
+    </>
+  );
+}
+
+function BrainResult({ isTumorPresent }) {
+  return (
+    <>
       <image />
+      <p>
+        Result:
+        <span>
+          {isTumorPresent ? " Brain tumor present" : " No brain tumor"}
+        </span>
+      </p>
     </>
   );
 }
