@@ -1,6 +1,17 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+h1 {
+  margin-left: 1.6rem;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  justify-content: left;
 }
+
+.gridCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+}
+
+
