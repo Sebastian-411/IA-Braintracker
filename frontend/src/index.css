@@ -1,5 +1,15 @@
 :root {
+  display: block;
+  max-width: 1920px;
+  height: 94%;
+  margin: 0 auto;
+  padding: 1rem;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  color: rgba(255, 255, 255, 0.87);
+  /* background: #000000;  */
+  background-image: linear-gradient(rgba(34, 21, 23, 0.87), rgba(171, 33, 181, 0.724)),
+   url('https://images.hdqwalls.com/download/geometry-cyberspace-abstract-5k-mt-1280x720.jpg');
+  background-size: cover;
 }
