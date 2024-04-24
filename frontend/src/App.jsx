@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import UploadFileForm from "./components/UploadFileForm";
+import UploadFileWrapper from "./components/UploadFileWrapper";
 import Footer from "./components/Footer";
 import HealthRecommendations from "./components/HealthRecommendations";
 import { uploadFiles } from "./services/fileUpload";
@@ -18,22 +18,14 @@ function App() {
     }
   };
 
+  // The UploadFileWrapper component is used to render the form and the model's response data
   return (
     <>
       <h1>Brain Tumor Checker</h1>
-      <UploadFileForm handleFileUpload={handleFileUpload} />
-      <img />
-      {healthData ? (
-        <p>
-          Result:
-          <span>
-            {healthData?.isTumorPresent
-              ? " Brain tumor present"
-              : " No brain tumor"}
-          </span>
-        </p>
-      ) : null}
-      {healthData ? <HealthRecommendations data={healthData} /> : null}
+      <div className="gridCard">
+        <UploadFileWrapper handleFileUpload={handleFileUpload} />
+        {healthData ? <HealthRecommendations data={healthData} /> : null}
+      </div>
       <Footer />
     </>
   );
