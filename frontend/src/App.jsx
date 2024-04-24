@@ -23,8 +23,13 @@ function App() {
     <>
       <h1>Brain Tumor Checker</h1>
       <div className="gridCard">
-        <UploadFileWrapper handleFileUpload={handleFileUpload} />
-        {healthData ? <HealthRecommendations data={healthData} /> : null}
+        <UploadFileWrapper
+          handleFileUpload={handleFileUpload}
+          healthData={healthData}
+        />
+        {healthData ? (
+          <HealthRecommendations data={healthData?.recommendations} />
+        ) : null}
       </div>
       <Footer />
     </>
