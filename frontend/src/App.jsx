@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import UploadFileWrapper from "./components/UploadFileWrapper";
 import Footer from "./components/Footer";
 import HealthRecommendations from "./components/HealthRecommendations";
@@ -22,7 +21,7 @@ function App() {
   return (
     <>
       <h1>Brain Tumor Checker</h1>
-      <div className="gridCard">
+      <div>
         <UploadFileWrapper
           handleFileUpload={handleFileUpload}
           healthData={healthData}
