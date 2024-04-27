@@ -1,5 +1,4 @@
 import React from "react";
-import BrainImage from "./BrainImage";
 
 function UploadFileForm({ handleFileUpload }) {
   const submitHandler = async (e) => {
@@ -27,9 +26,8 @@ function UploadFileForm({ handleFileUpload }) {
           <label htmlFor="file">Select files</label>
           <input type="file" id="file" name="file" multiple />
         </div>
-        <button type="submit">Check</button>
-      </form>
-      <BrainImage />
+        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg" type="submit">Check</button>
+      </form>      
     </div>
   );
 }

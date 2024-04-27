@@ -1,0 +1,6 @@
+.eslintrc.cjs
+node_modules/
+package-lock.json
+pnpm-lock.json
+.prettierrc
+.gitignore
