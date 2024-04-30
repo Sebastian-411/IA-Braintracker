@@ -19,15 +19,27 @@ function UploadFileForm({ handleFileUpload }) {
     handleFileUpload(formData);
   };
   return (
-    <div>
-      <p>Upload MRI scan and clinical history to check if you have a tumor</p>
-      <form encType="multipart/form-data" onSubmit={submitHandler}>
-        <div>
-          <label htmlFor="file">Select files</label>
-          <input type="file" id="file" name="file" multiple />
+    <div className="flex">
+      <div className="card-normal bg-base-100 shadow-xl">
+        <div className="card-body">
+          <p className="card-title">
+            Upload MRI scan and clinical history to check if you have a tumor
+          </p>
+          <div className="card-body text-center">
+            <form encType="multipart/form-data" onSubmit={submitHandler}>
+              <div className="card-body justify-center">
+                <label htmlFor="file"></label>
+                <input type="file" id="file" name="file" multiple />
+              </div>
+              <div className="card-actions justify-end">
+                <button className="btn btn-lg btn-primary" type="submit">
+                  Check
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg" type="submit">Check</button>
-      </form>      
+      </div>
     </div>
   );
 }
