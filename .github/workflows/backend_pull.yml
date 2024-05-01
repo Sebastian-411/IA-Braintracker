@@ -19,6 +19,9 @@ jobs:
           cd backend
           pip install -r requirements.txt
 
+      - name: Create env
+        run: |
+          echo API_KEY=${{secrets.API_KEY}} >> ./backend/.env
       - name: Run tests
         run: |
           cd backend
