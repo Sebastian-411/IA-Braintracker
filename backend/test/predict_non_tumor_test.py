@@ -7,7 +7,7 @@ def api_url():
 
 @pytest.fixture
 def sample_image_path():
-    return "./resource/test/tumor_test/Cancer (1).jpg"
+    return "./resource/test/tumor_test/Not Cancer  (2).jpeg"
 
 def test_predict_tumor(api_url, sample_image_path):
     with open(sample_image_path, "rb") as image_file:
@@ -16,4 +16,4 @@ def test_predict_tumor(api_url, sample_image_path):
 
     assert response.status_code == 200
     assert "prediction" in response.json()
-    assert response.json()["prediction"] == "Resultado del MRI: El modelo predictivo observa la probabilidad de que haya un tumor."
+    assert response.json()["prediction"] == "Resultado del MRI: El modelo predictivo NO observa la probabilidad de que haya un tumor."

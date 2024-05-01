@@ -7,8 +7,9 @@ class GenerativeModel:
         self.model_name = model_name
 
     def generate_content(self, content, generation_config, safety_settings):
-        genai.configure(api_key="AIzaSyCmFdh6cWQqgQY9oIWR0VLiPsq-WkcLRzw")
+        genai.configure(api_key="AIzaSyDmn7kKXdLbw0tJIDqUcNMbSBSFU_hd0GE")
         gemini = genai.GenerativeModel(model_name=self.model_name)
+        
         response = gemini.generate_content(
             content,
             generation_config=generation_config,

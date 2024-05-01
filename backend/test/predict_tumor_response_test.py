@@ -5,15 +5,17 @@ import requests
 def api_url():
     return "http://localhost:8000/"
 
-@pytest.fixture
-def sample_hc_path():
-    return "./resource/test/clinical_history_test/laso-ortiz.pdf"
+def test_concatenate_pdf_text(api_url):
 
-def test_predict_tumor(api_url, sample_hc_path):
-    with open(sample_hc_path, "rb") as image_file:
-        files = {"pdf_file": image_file}
-        response = requests.post(api_url, files=files)
+    with open("./resource/test/clinical_history_test/laso-ortiz.pdf", "rb") as pdf_file:
+
+        files = {"pdf_file": pdf_file}
+        data = {"text": "Tumor presente"}
+
+
+        response = requests.post(api_url, data=data, files=files)
 
     assert response.status_code == 200
-    assert "prediction" in response.json()
+
     print(response.json())
+    assert "response" in response.json()
