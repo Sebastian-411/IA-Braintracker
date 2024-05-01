@@ -5,18 +5,20 @@ import json
 import joblib
 import numpy as np
 from PyPDF2 import PdfReader
+from dotenv import load_dotenv
+import os
 
 import io
 from PIL import Image
 
 from skimage.io import imread
 from skimage.transform import resize
-
-
 from model import GenerativeModel
 
 from utilities import *
 
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -30,7 +32,7 @@ contents = decode_base64_string(contents_b64)
 generation_config = decode_base64_string(generation_config_b64)
 safety_settings = decode_base64_string(safety_settings_b64)
 
-model_instance = GenerativeModel(model_name=model_LLM)
+model_instance = GenerativeModel(model_name=model_LLM, key=os.getenv('API_KEY'))
 
 
 
