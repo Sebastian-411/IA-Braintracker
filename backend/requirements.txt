@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+google-generativeai
+google
+pandas
+scikit-learn
+scikit-image
+pytest
+python-multipart
+PyPDF2
+python-dotenv
+dotenv
