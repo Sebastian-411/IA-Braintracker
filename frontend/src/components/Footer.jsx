@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="footer items-center p-4 bg-neutral text-neutral-content fixed bottom-0 w-full">
+    <footer className="footer p-4 bg-base-300 text-base-content">
       <p>
         <strong>Disclaimer:</strong> This service is designed to provide a
         preliminary assessment and should not be used as a definitive diagnosis.
@@ -17,7 +17,7 @@ function Footer() {
         </a>
       </p>
       <dialog id="modal_info" className="modal modal-middle">
-        <div className="modal-box w-11/12 max-w-5xl text-cyan-900">
+        <div className="modal-box w-11/12 max-w-5xl">
           <h2 className="font-bold text-lg">Liability Statement</h2>
           <p className="py-3">
             Before uploading your magnetic resonance imaging (MRI) brain scan,
