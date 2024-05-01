@@ -1,12 +1,13 @@
 
 import google.generativeai as genai
+import os
 
 class GenerativeModel:
     def __init__(self, model_name):
         self.model_name = model_name
 
     def generate_content(self, content, generation_config, safety_settings):
-        genai.configure(api_key="AIzaSyDmn7kKXdLbw0tJIDqUcNMbSBSFU_hd0GE")
+        genai.configure(api_key=os.environ.get('API_KEY'))
         gemini = genai.GenerativeModel(model_name=self.model_name)
         
         response = gemini.generate_content(

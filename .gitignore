@@ -8,3 +8,4 @@
 /backend/test/__pycache__
 /backend/key/settings_token.pkl
 /model/gemini-model-build.ipynb
+/backend/.env
