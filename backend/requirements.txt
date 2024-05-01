@@ -8,3 +8,4 @@ scikit-image
 pytest
 python-multipart
 PyPDF2
+python-dotenv==1.0.1
