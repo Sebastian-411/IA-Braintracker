@@ -10,7 +10,7 @@ env:
   ECS_CLUSTER: medical_assistant_cluster
   ECS_SERVICE: medical_assistant_backend
   ECR_REPOSITORY: 891377268337.dkr.ecr.us-east-1.amazonaws.com/medical_assistant_backend
-  API_KEY: ${{ secrets.API_KEY }}
+  API_KEY: ${{secrets.API_KEY}}
 
 jobs:
   build_image_backend:
@@ -37,7 +37,7 @@ jobs:
           IMAGE_TAG: lastest
         run: |
 
-          echo API_KEY=${{secrets.API_KEY}} >> ./backend/.env
+          echo API_KEY=${{env.API_KEY}} >> ./backend/.env
 
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG ./backend
 
