@@ -7,11 +7,13 @@ on:
 
 env:
   AWS_REGION: us-east-1
+  ECS_CLUSTER: medical_assistant_cluster
+  ECS_SERVICE: medical_assistant_backend
   ECR_REPOSITORY: 891377268337.dkr.ecr.us-east-1.amazonaws.com/medical_assistant_backend
                                               
 
 jobs:
-  deploy:
+  build_image_backend:
     runs-on: ubuntu-latest
 
     steps:
@@ -43,4 +45,21 @@ jobs:
 
           echo "image=$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
+
+  deploy_backend:
+    runs-on: ubuntu-latest
+    needs: build_image_backend
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service --cluster ${{ env.ECS_CLUSTER }} --service ${{ env.ECS_SERVICE }} --force-new-deployment
