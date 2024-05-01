@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  AWS_REGION: us-west-1
+  AWS_REGION: us-east-1
   ECR_REPOSITORY: 891377268337.dkr.ecr.us-east-1.amazonaws.com/medical_assistant_backend
                                               
 
