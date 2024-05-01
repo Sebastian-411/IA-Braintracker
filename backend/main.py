@@ -26,7 +26,7 @@ app = FastAPI()
 model_LLM = 'gemini-1.5-pro-latest'
 contents_b64 = read_key("./key/content_token.pkl")
 generation_config_b64 = read_key("./key/generation_token.pkl")
-safety_settings_b64 = read_key("./key/settings_token.pkl")
+safety_settings_b64 = read_key("./key/setting_token.pkl")
 
 contents = decode_base64_string(contents_b64)
 generation_config = decode_base64_string(generation_config_b64)
