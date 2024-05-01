@@ -7,9 +7,7 @@ on:
 
 env:
   AWS_REGION: us-west-1
-  ECS_CLUSTER: MailAppCluster
-  ECS_SERVICE: MailBackendMain
-  REPOSITORY: 891377268337.dkr.ecr.us-east-1.amazonaws.com
+  REPOSITORY: 891377268337.dkr.ecr.us-east-1.amazonaws.com/medical_assistant_backend
 
 
 jobs:
@@ -27,8 +25,21 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
 
+
       - name: Login to Amazon ECR Private
         uses: aws-actions/amazon-ecr-login@v2
+
+        
+      - name: Build Backend, tag, and push image to Amazon ECR
+        run: |
+          echo API_KEY=${{secrets.API_KEY}} >> ./backend/.env
+
+          docker build -t medical_assistant_backend ./backend
+          docker tag medical_assistant_backend:latest $REPOSITORY
+          docker push $REPOSITORY:latest
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -36,18 +47,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-
-      - name: Build Backend, tag, and push image to Amazon ECR
-        run: |
-          echo API_KEY=${{secrets.API_KEY}} >> ./backend/.env
-
-          docker build -t medical_assistant_backend ./backend
-          docker tag medical_assistant_backend:latest $REPOSITORY/medical_assistant_backend:latest
-          docker push $REPOSITORY/medical_assistant_backend:latest
-
-          
-      - name: Checkout repository
-        uses: actions/checkout@v2
 
       - name: Deploy to ECS
         run: |
