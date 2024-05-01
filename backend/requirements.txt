@@ -8,5 +8,3 @@ scikit-image
 pytest
 python-multipart
 PyPDF2
-python-dotenv
-dotenv
