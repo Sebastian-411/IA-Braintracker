@@ -1,4 +1,3 @@
-# generative_model.py
 
 import google.generativeai as genai
 
