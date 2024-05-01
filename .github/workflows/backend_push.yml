@@ -42,9 +42,10 @@ jobs:
           echo API_KEY=${{secrets.API_KEY}} >> ./backend/.env
 
           docker build -t medical_assistant_backend ./backend
-          docker tag medical_assistant_backend:latest $REPOSITORY
+          docker tag medical_assistant_backend:latest $REPOSITORY/medical_assistant_backend:latest
           docker push $REPOSITORY/medical_assistant_backend:latest
 
+          
       - name: Checkout repository
         uses: actions/checkout@v2
 
