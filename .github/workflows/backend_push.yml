@@ -32,7 +32,7 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: lastest
         run: |
 
           echo API_KEY=${{secrets.API_KEY}} >> ./backend/.env
