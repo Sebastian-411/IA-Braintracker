@@ -3,7 +3,7 @@ import requests
 
 @pytest.fixture
 def api_url():
-    return "http://localhost:8000/predict_tumor/"
+    return "http://127.0.0.1:8000/"
 
 @pytest.fixture
 def sample_image_path():
