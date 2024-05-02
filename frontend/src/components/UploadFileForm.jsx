@@ -1,7 +1,4 @@
 import React from "react";
-import BrainImage from "./BrainImage";
-import "./css/UploadFileForm.css";
-
 
 function UploadFileForm({ handleFileUpload }) {
   const submitHandler = async (e) => {
@@ -22,19 +19,25 @@ function UploadFileForm({ handleFileUpload }) {
     handleFileUpload(formData);
   };
   return (
-    <div className="card">
-      <p>Upload MRI scan and clinical history to check if you have a tumor</p>
-      <form 
-        encType="multipart/form-data" 
-        onSubmit={submitHandler}
-      >
-        <div>
-          <label htmlFor="file" className="customBtnUploadFiles">Select files</label>
-          <input type="file" id="file" name="file" multiple />
+    <div className="pr-8">
+      <form encType="multipart/form-data" onSubmit={submitHandler}>
+        <label className="text-2xl font-semibold" htmlFor="file">
+          Select MRI scan and clinical history
+        </label>
+        <div className="flex flex-col ">
+          <input
+            className="pt-4 pb-2 w-1/2"
+            type="file"
+            id="file"
+            name="file"
+            multiple
+          />
+
+          <button className="btn btn-primary w-1/2" type="submit">
+            Submit
+          </button>
         </div>
-        <button type="submit" className="customBtnUploadFiles submitBtn">Check</button>
       </form>
-      <BrainImage />
     </div>
   );
 }
