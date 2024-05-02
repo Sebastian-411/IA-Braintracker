@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import UploadFileWrapper from "./components/UploadFileWrapper";
 import Footer from "./components/Footer";
 import HealthRecommendations from "./components/HealthRecommendations";
@@ -18,21 +17,29 @@ function App() {
     }
   };
 
+  const fakeHealth = {
+    isTumorPresent: true,
+    recommendations: `For optimal health, nourish yourself with a balanced diet, get regular exercise, prioritize quality sleep,
+       and manage stress. Listen to your body's cues, schedule preventive checkups, and incorporate healthy habits into your daily routine.
+        These small steps pave the way for a life of well-being.`,
+  };
+
   // The UploadFileWrapper component is used to render the form and the model's response data
   return (
-    <>
-      <h1>Brain Tumor Checker</h1>
-      <div className="gridCard">
+    <div className="flex flex-col min-h-screen">
+      <h1 className="text-6xl font-bold p-6">Brain Tumor Checker</h1>
+      <main className="flex-1 flex max-w-7xl self-center pt-8">
         <UploadFileWrapper
           handleFileUpload={handleFileUpload}
-          healthData={healthData}
+          healthData={fakeHealth}
+          className="grow"
         />
-        {healthData ? (
-          <HealthRecommendations data={healthData?.recommendations} />
+        {fakeHealth ? (
+          <HealthRecommendations data={fakeHealth?.recommendations} />
         ) : null}
-      </div>
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

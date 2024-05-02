@@ -1,12 +1,10 @@
 import React from "react";
-import "./css/UploadFileForm.css";
-import "./css/HealthRecommendations.css";
 
 function HealthRecommendations({ data }) {
   return (
-    <div className="card llmCard">
-      <h3>I have some medical history advice for you:</h3>
-      <p>{data}</p>
+    <div className="max-w-xl pl-16">
+      <h3 className="text-3xl font-semibold">Health recommendations:</h3>
+      <p className="pt-4">{data}</p>
     </div>
   );
 }
