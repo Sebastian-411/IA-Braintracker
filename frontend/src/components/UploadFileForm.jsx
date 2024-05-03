@@ -1,23 +1,38 @@
 import React from "react";
 
-function UploadFileForm({ handleFileUpload }) {
+function UploadFileForm({
+  handleFileUpload,
+  expectedFiles = ["clinical_history.pdf", "brain_mri.jpg"],
+}) {
   const submitHandler = async (e) => {
     e.preventDefault();
     const files = e.target.elements.file.files;
 
     if (files.length === 0) {
-      console.log("No files selected");
-      return;
+      throw new Error("No files selected");
     }
-    // Create a new FormData instance
+
+    if (files.length !== expectedFiles.length) {
+      throw new Error(`Please upload exactly ${expectedFiles.length} files`);
+    }
+
+    const filenames = Array.from(files).map((file) => file.name);
+
+    if (
+      !expectedFiles.every((expectedFile) => filenames.includes(expectedFile))
+    ) {
+      throw new Error("Wrong filenames");
+    }
+
     const formData = new FormData();
-    // Append each file to the form data
-    for (let i = 0; i < files.length; i++) {
+
+    for (let i = 0; i < expectedFiles.length; i++) {
       formData.append("files", files[i]);
     }
 
     handleFileUpload(formData);
   };
+
   return (
     <div className="pr-8">
       <form encType="multipart/form-data" onSubmit={submitHandler}>
@@ -26,14 +41,14 @@ function UploadFileForm({ handleFileUpload }) {
         </label>
         <div className="flex flex-col ">
           <input
-            className="pt-4 pb-2 w-1/2"
+            className="pt-4 pb-2 w-full"
             type="file"
             id="file"
             name="file"
             multiple
           />
 
-          <button className="btn btn-primary w-1/2" type="submit">
+          <button className="btn btn-primary w-2/3" type="submit">
             Submit
           </button>
         </div>
