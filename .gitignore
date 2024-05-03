@@ -10,3 +10,4 @@
 /backend/key/settings_token.pkl
 /model/gemini-model-build.ipynb
 /backend/.env
+/backend/venv
