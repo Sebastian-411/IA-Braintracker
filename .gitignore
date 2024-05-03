@@ -1,5 +1,6 @@
 /model/dataset/archive/Brain Tumor Data Set/Brain Tumor Data Set/Brain Tumor
 /model/dataset/archive/Brain Tumor Data Set/Brain Tumor Data Set/Healthy
+.pnpm*/
 /model/resource
 /backend/__pycache__
 /backend/.pytest_cache
@@ -9,3 +10,4 @@
 /backend/key/settings_token.pkl
 /model/gemini-model-build.ipynb
 /backend/.env
+/backend/venv
