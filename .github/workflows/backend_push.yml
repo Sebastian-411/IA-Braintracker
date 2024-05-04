@@ -1,9 +1,11 @@
 name: Deploy to Amazon ECS
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [closed]
+    branches: [master]
+    paths:
+      - "backend/**"
 
 env:
   AWS_REGION: us-east-1
@@ -11,6 +13,7 @@ env:
   ECS_SERVICE: medical_assistant_backend
   ECR_REPOSITORY: 891377268337.dkr.ecr.us-east-1.amazonaws.com/medical_assistant_backend
   API_KEY: ${{secrets.API_KEY}}
+  FRONTEND_URL: http://lb-medical-assistant-503996398.us-east-1.elb.amazonaws.com/
 
 jobs:
   build_image_backend:
@@ -38,6 +41,7 @@ jobs:
         run: |
 
           echo API_KEY=${{env.API_KEY}} >> ./backend/.env
+          echo FRONTEND_URL=${{env.FRONTEND_URL}} >> ./backend/.env
 
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG ./backend
 
@@ -47,7 +51,6 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v2
-
 
   deploy_backend:
     runs-on: ubuntu-latest

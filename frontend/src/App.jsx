@@ -3,9 +3,11 @@ import UploadFileWrapper from "./components/UploadFileWrapper";
 import Footer from "./components/Footer";
 import HealthRecommendations from "./components/HealthRecommendations";
 import { uploadFiles } from "./services/fileUpload";
+import Notification from "./components/Notification";
 
 function App() {
   const [healthData, setHealthData] = useState(null);
+  const [notification, setNotification] = useState(null);
 
   // Callback to update the state after uploading the file
   const handleFileUpload = async (formData) => {
@@ -15,6 +17,13 @@ function App() {
     } catch (error) {
       console.error("Error during file upload");
     }
+  };
+
+  const notify = (message, type = "success") => {
+    setNotification({ message, type });
+    setTimeout(() => {
+      setNotification(null);
+    }, 3000);
   };
 
   const fakeHealth = {
@@ -28,10 +37,12 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <h1 className="text-6xl font-bold p-6">Brain Tumor Checker</h1>
-      <main className="flex-1 flex max-w-7xl self-center pt-8">
+      <Notification notification={notification} />
+      <main className="flex-1 flex max-w-7xl self-center pt-16">
         <UploadFileWrapper
           handleFileUpload={handleFileUpload}
           healthData={fakeHealth}
+          notify={notify}
           className="grow"
         />
         {fakeHealth ? (
