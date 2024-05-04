@@ -1,27 +1,16 @@
-from typing import Annotated, List, Union
-from fastapi import APIRouter, HTTPException, UploadFile, File
-import imageio
-
-
-from schemas.ClassificationModelOut import ClassificationModelOut
-from schemas.MRIFileUploaded import MRIFileUploaded
-from schemas.ClinicHistoryFileUploaded import ClinicHistoryFileUploaded
-
-from schemas.SuggestionLLMOut import SuggestionLLMOut
-
-import numpy as np
-from dotenv import load_dotenv
-
+# from typing import Union
 import io
+from fastapi import APIRouter, Depends, UploadFile
 
-# from skimage.io import imread
-from skimage.transform import resize
+from controllers.v1.history_clinic import extract_text_from_pdf
+from controllers.v1.MRI_image import predict_tumor_by_img
+from controllers.v1.validate_files import processing_file_type_based
+
+from dotenv import load_dotenv
 from model import GenerativeModel
 
 from utils.utilities import (
-    predict_tumor_by_img,
     decode_base64_string,
-    extract_text_from_pdf,
 )
 
 from utils.LLM_config import (
@@ -48,47 +37,31 @@ model_instance = GenerativeModel(
 
 @router.post(
     "/files",
-    response_model=Union[ClassificationModelOut, SuggestionLLMOut],
     status_code=200,
-)  # To know: Response model is a list of two strings: the output of both ClassificationModelOut and SuggestionLLMOut
-async def predict_tumor(
-    mri_image: Annotated[MRIFileUploaded, File()],
-    clinic_history: Annotated[ClinicHistoryFileUploaded, File()],
-):
-    # contents = await imageio.read()
+    dependencies=[
+        Depends(processing_file_type_based),
+    ],
+)
+async def predict_tumor(files: list[UploadFile]):
+    img = None
+    pdf = None
 
-    contents = await mri_image.read()
+    for file in files:
+        if file.filename.split(".")[0] == "brain_mri":
+            img = file
+        elif file.filename.split(".")[0] == "clinical_history":
+            pdf = file
 
-    img = imageio.imread(io.BytesIO(contents))
+    # Call the function to predict the tumor
+    prediction = await predict_tumor_by_img(img=img)
 
-    img = resize(img, (15, 15))
-    img = img.flatten()
-    img = np.pad(img, (0, 900 - len(img)), mode="constant")
-    img = np.expand_dims(img, axis=0)
+    # Call the function to extract the text from the PDF
+    pdf_content = await pdf.read()
+    pdf_text = extract_text_from_pdf(io.BytesIO(pdf_content))
 
-    prediction = predict_tumor_by_img(img)
+    prompt = "RESPONDE EN ESPAÑOL" + prediction + "\nHISTORIA CLINICA:\n" + pdf_text
 
-    return {"prediction": prediction}
+    # Call the function to generate the health recommendation from the LLM
+    result = model_instance.generate_content(prompt, generation_config, safety_settings)
 
-
-# @router.post("/")
-# async def concatenate_pdf_text(pdf_file: UploadFile = File(...), text: str = ""):
-#     try:
-#         if not pdf_file.filename.endswith(".pdf"):
-#             raise HTTPException(
-#                 status_code=400, detail="The format file is not supported."
-#             )
-
-#         pdf_content = await pdf_file.read()
-
-#         pdf_text = extract_text_from_pdf(io.BytesIO(pdf_content))
-
-#         prompt = "RESPONDE EN ESPAÑOL" + text + "\nHISTORIA CLINICA:\n" + pdf_text
-
-#         result = model_instance.generate_content(
-#             prompt, generation_config, safety_settings
-#         )
-
-#         return {"response": result}
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
+    return {"prediction": prediction, "health_recommendation": result}
