@@ -1,4 +1,5 @@
 import io
+import os
 from fastapi import APIRouter, Depends, UploadFile
 
 from controllers.v1.history_clinic import extract_text_from_pdf
@@ -23,15 +24,13 @@ from utils.LLM_config import (
 router = APIRouter(prefix="/v1")
 
 load_dotenv()
-
+GEMINI_API_KEY = os.getenv("API_KEY")
 
 contents = decode_base64_string(contents_b64)
 generation_config = decode_base64_string(generation_config_b64)
 safety_settings = decode_base64_string(safety_settings_b64)
 
-model_instance = GenerativeModel(
-    model_name=model_LLM, key="AIzaSyDmn7kKXdLbw0tJIDqUcNMbSBSFU_hd0GE"
-)
+model_instance = GenerativeModel(model_name=model_LLM, key=GEMINI_API_KEY)
 
 
 @router.post(
