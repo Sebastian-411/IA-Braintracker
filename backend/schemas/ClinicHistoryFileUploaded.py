@@ -1,18 +1,18 @@
+from typing import Annotated, Literal
 from fastapi import UploadFile
 from pydantic import BaseModel, field_validator
+from pydantic_core import PydanticCustomError
 
 
-class ClinicHistoryFileUploaded(UploadFile, BaseModel):
+class ClinicHistoryFileUploaded(BaseModel):
+    name: Literal["clinical_history"]
+    file: UploadFile
+    type: Literal["application/pdf"]
+    size: Annotated[int, field_validator("size")]
+
     @field_validator("size")
     @classmethod
     def validate_size(cls, value):
-        if value > (5 * 1024 * 1024):
-            raise ValueError("File size is too large")
-        return value
-
-    @field_validator("content_type")
-    @classmethod
-    def validate_extension(cls, value):
-        if value.split("/")[-1] not in ["pdf"]:
-            raise ValueError("File extension is not supported")
+        if value > (2 * 1024 * 1024):  # 2MB limit
+            raise PydanticCustomError("size_file_error", "File size is too large")
         return value

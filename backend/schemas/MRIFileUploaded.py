@@ -1,24 +1,18 @@
-import imageio
+from typing import Literal
 from pydantic import BaseModel, field_validator
 from fastapi import UploadFile
+from pydantic_core import PydanticCustomError
 
 
-class MRIFileUploaded(UploadFile, BaseModel):
-    # size: Annotated[int, Field(min_value=0, max_value=5242880)]
+class MRIFileUploaded(BaseModel):
+    name: Literal["brain_mri"]
+    file: UploadFile
+    type: Literal["image/jpeg", "image/png", "image/jpg"]
+    size: int
 
     @field_validator("size")
     @classmethod
     def validate_size(cls, value):
-        if value > (5 * 1024 * 1024):  # 5MB limit
-            raise ValueError("File size is too large")
+        if value > (2 * 1024 * 1024):  # 2MB limit
+            raise PydanticCustomError("size_file_error", "File size is too large")
         return value
-
-    @field_validator("content_type")
-    @classmethod
-    def validate_extension(cls, value):
-        if value.split("/")[-1] not in ["jpg", "jpeg", "png"]:
-            raise ValueError("File extension is not supported")
-        return value
-
-    async def read(self):
-        return await imageio.read()
