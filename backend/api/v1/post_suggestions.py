@@ -1,4 +1,3 @@
-# from typing import Union
 import io
 from fastapi import APIRouter, Depends, UploadFile
 
@@ -41,8 +40,11 @@ model_instance = GenerativeModel(
     dependencies=[
         Depends(processing_file_type_based),
     ],
+    response_model=dict[str, str],
 )
-async def predict_tumor(files: list[UploadFile]):
+async def predict_tumor(
+    files: list[UploadFile],
+):
     img = None
     pdf = None
 
@@ -53,15 +55,20 @@ async def predict_tumor(files: list[UploadFile]):
             pdf = file
 
     # Call the function to predict the tumor
-    prediction = await predict_tumor_by_img(img=img)
+    classification = await predict_tumor_by_img(img=img)
 
     # Call the function to extract the text from the PDF
     pdf_content = await pdf.read()
     pdf_text = extract_text_from_pdf(io.BytesIO(pdf_content))
 
-    prompt = "RESPONDE EN ESPAÑOL" + prediction + "\nHISTORIA CLINICA:\n" + pdf_text
+    prompt = "RESPONDE EN ESPAÑOL" + classification + "\nHISTORIA CLINICA:\n" + pdf_text
 
     # Call the function to generate the health recommendation from the LLM
-    result = model_instance.generate_content(prompt, generation_config, safety_settings)
+    results = model_instance.generate_content(
+        prompt, generation_config, safety_settings
+    )
 
-    return {"prediction": prediction, "health_recommendation": result}
+    return {
+        "classification": classification,
+        "analysis_results": results,
+    }

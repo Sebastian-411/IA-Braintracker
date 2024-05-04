@@ -1,5 +1,4 @@
 from PyPDF2 import PdfReader
-from fastapi import Depends, UploadFile
 
 
 def extract_text_from_pdf(pdf_file):
