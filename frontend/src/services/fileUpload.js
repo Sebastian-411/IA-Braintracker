@@ -1,4 +1,4 @@
-const baseUrl = "";
+const baseUrl = "http://localhost:8000/";
 
 const uploadFiles = async (formData) => {
   try {
@@ -12,6 +12,7 @@ const uploadFiles = async (formData) => {
     }
 
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error("Error during file upload:", error);
