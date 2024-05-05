@@ -9,16 +9,6 @@ function UploadFileWrapper({ handleFileUpload, healthData, notify }) {
         <figure>
           <img src="/brain_PNG34.png" alt="blue brain" className="max-w-48" />
         </figure>
-        {healthData ? (
-          <p>
-            <span className="font-bold">Result:</span>
-            <span>
-              {healthData?.isTumorPresent
-                ? " Tumor present"
-                : " No tumor present"}
-            </span>
-          </p>
-        ) : null}
       </div>
     </div>
   );

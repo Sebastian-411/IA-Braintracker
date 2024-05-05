@@ -26,28 +26,19 @@ function App() {
     }, 3000);
   };
 
-  const fakeHealth = {
-    isTumorPresent: true,
-    recommendations: `For optimal health, nourish yourself with a balanced diet, get regular exercise, prioritize quality sleep,
-       and manage stress. Listen to your body's cues, schedule preventive checkups, and incorporate healthy habits into your daily routine.
-        These small steps pave the way for a life of well-being.`,
-  };
-
   // The UploadFileWrapper component is used to render the form and the model's response data
   return (
     <div className="flex flex-col min-h-screen">
-      <h1 className="text-6xl font-bold p-6">Brain Tumor Checker</h1>
+      <h1 className="text-6xl font-bold p-6">Asistente Medico</h1>
       <Notification notification={notification} />
-      <main className="flex-1 flex max-w-7xl self-center pt-16">
+      <main className="flex-1 flex max-w-7xl self-center pt-16 flex-col">
         <UploadFileWrapper
           handleFileUpload={handleFileUpload}
-          healthData={fakeHealth}
+          healthData={healthData}
           notify={notify}
           className="grow"
         />
-        {fakeHealth ? (
-          <HealthRecommendations data={fakeHealth?.recommendations} />
-        ) : null}
+        <HealthRecommendations data={healthData} />
       </main>
       <Footer />
     </div>
