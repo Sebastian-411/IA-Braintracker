@@ -8,22 +8,27 @@ import Notification from "./components/Notification";
 function App() {
   const [healthData, setHealthData] = useState(null);
   const [notification, setNotification] = useState(null);
-
-  // Callback to update the state after uploading the file
-  const handleFileUpload = async (formData) => {
-    try {
-      const response = await uploadFiles(formData);
-      setHealthData(response);
-    } catch (error) {
-      console.error("Error during file upload");
-    }
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   const notify = (message, type = "success") => {
     setNotification({ message, type });
     setTimeout(() => {
       setNotification(null);
     }, 3000);
+  };
+
+  // Callback to update the state after uploading the file
+  const handleFileUpload = async (formData) => {
+    setIsLoading(true);
+    try {
+      const response = await uploadFiles(formData);
+      setHealthData(response);
+    } catch (error) {
+      console.error("Error:", error);
+      notify(error.message, "error");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // The UploadFileWrapper component is used to render the form and the model's response data
@@ -34,11 +39,12 @@ function App() {
       <main className="flex-1 flex max-w-7xl self-center pt-16 flex-col">
         <UploadFileWrapper
           handleFileUpload={handleFileUpload}
-          healthData={healthData}
           notify={notify}
+          disabled={isLoading}
           className="grow"
         />
-        <HealthRecommendations data={healthData} />
+        <div className="divider"></div>
+        <HealthRecommendations data={healthData} isLoading={isLoading} />
       </main>
       <Footer />
     </div>
