@@ -4,76 +4,78 @@ function Footer() {
   return (
     <footer className="footer p-4 bg-base-300 text-base-content">
       <p>
-        <strong>Disclaimer:</strong> This service is designed to provide a
-        preliminary assessment and should not be used as a definitive diagnosis.
-        We are not responsible for actions taken based on the results provided
-        by this service. Always seek the advice of a qualified medical
-        professional for any questions regarding your health.
+        <strong>Advertencia:</strong> Este servicio está diseñado para
+        proporcionar una evaluación preliminar y no debe utilizarse como
+        diagnóstico definitivo. No nos hacemos responsables de las medidas
+        adoptadas sobre la base de los resultados proporcionados por este
+        servicio. Consulte siempre a un profesional médico cualificado para
+        cualquier cuestión relacionada con su salud.
         <a
           className="link link-warning"
           onClick={() => document.getElementById("modal_info").showModal()}
         >
-          Click here to know more
+          Haga clic aquí para saber más
         </a>
       </p>
       <dialog id="modal_info" className="modal modal-middle">
         <div className="modal-box w-11/12 max-w-5xl">
-          <h2 className="font-bold text-lg">Liability Statement</h2>
+          <h2 className="font-bold text-lg">Declaración de responsabilidad</h2>
           <p className="py-3">
-            Before uploading your magnetic resonance imaging (MRI) brain scan,
-            please note the following:{" "}
+            Antes de cargar su escáner cerebral por resonancia magnética (IRM),
+            tenga en cuenta lo siguiente:{" "}
           </p>
           <dl>
             <p className="py-1">
               <dt>
-                <strong>Confidentiality and Privacy</strong>
+                <strong>Confidencialidad y privacidad</strong>
               </dt>
               <dd>
-                This website is committed to protecting your privacy. All
-                uploaded data is treated with the highest level of
-                confidentiality and in accordance with applicable data
-                protection laws.
+                Este sitio web se compromete a proteger su privacidad. Todos los
+                datos cargados en los datos cargados se tratan con el máximo
+                nivel de confidencialidad y de acuerdo con la legislación de
+                protección de datos.
               </dd>
             </p>
             <p className="py-1">
               <dt>
-                <strong>Data Security</strong>
+                <strong>Seguridad de los datos</strong>
               </dt>
               <dd>
-                We implement technical and organizational security measures to
-                protect your personal data against unauthorized access,
-                alteration or destruction.
+                Aplicamos medidas de seguridad técnicas y organizativas para
+                proteger sus datos personales contra el acceso no autorizado
+                alteración o destrucción.
               </dd>
             </p>
             <p className="py-1">
               <dt>
-                <strong>Data Use</strong>
+                <strong>Uso de los datos</strong>
               </dt>
               <dd>
-                The uploaded data is used exclusively for the purpose of
-                assessing the presence of possible brain tumors using artificial
-                intelligence algorithms. It is not shared with third parties
-                without your explicit consent.
+                Los datos cargados se utilizan exclusivamente para evaluar la
+                presencia de posibles tumores cerebrales mediante algoritmos de
+                inteligencia artificial. No se comparten con terceros sin su
+                consentimiento explícito.
               </dd>
             </p>
             <p className="py-1">
               <dt>
-                <strong>Informed Consent</strong>
+                <strong>Consentimiento informado</strong>
               </dt>
               <dd>
-                By uploading your MRI, you consent to the analysis of your data
-                and understand that the final responsibility for any medical
-                decisions rests with your physician or healthcare professional.
+                Al cargar su IRM, da su consentimiento para el análisis de sus
+                datos y entiende que la responsabilidad final de cualquier
+                decisión decisiones médicas recae en su médico o profesional
+                sanitario.
               </dd>
             </p>
             <p className="py-1">
               <dt>
-                <strong>Limitations of Service</strong>
+                <strong>Limitaciones del servicio</strong>
               </dt>
               <dd>
-                This service is not a substitute for clinical diagnosis by
-                healthcare professionals. If you have concerns about your
-                health, please consult your physician.
+                Este servicio no sustituye el diagnóstico clínico realizado por
+                profesionales sanitarios. Si tiene dudas sobre su salud,
+                consulte a su médico.
               </dd>
             </p>
           </dl>
@@ -81,7 +83,7 @@ function Footer() {
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <button className="btn hoover:btn-primary btn-outline">
-                Close
+                Cerrar
               </button>
             </form>
           </div>
