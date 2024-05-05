@@ -11,12 +11,15 @@ function UploadFileForm({
     const files = e.target.elements.file.files;
 
     if (files.length === 0) {
-      notify("No files selected", "error");
+      notify("No hay archivos seleccionados", "error");
       return;
     }
 
     if (files.length !== expectedFiles.length) {
-      notify(`Please upload exactly ${expectedFiles.length} files`, "error");
+      notify(
+        `Por favor, suba exactamente ${expectedFiles.length} archivos`,
+        "error",
+      );
       return;
     }
 
@@ -25,7 +28,7 @@ function UploadFileForm({
     if (
       !expectedFiles.every((expectedFile) => filenames.includes(expectedFile))
     ) {
-      notify("Wrong filenames", "error");
+      notify("Los archivos no tienen el formato correcto", "error");
       return;
     }
 
@@ -36,7 +39,7 @@ function UploadFileForm({
     }
 
     handleFileUpload(formData);
-    notify("Files successfully sent. Processing...");
+    notify("Archivos enviados exitosamente. Procesando...");
   };
 
   return (
