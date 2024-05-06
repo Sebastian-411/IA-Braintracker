@@ -32,19 +32,15 @@ def processing_file_type_based(files: list[UploadFile]):
         # Assign the file to the corresponding variable
         if is_type_image(file.content_type):
             try:
-                name = os.path.splitext(file.filename)[0]
-                img = MRIFileUploaded(
-                    file=file, name=name, type=file.content_type, size=file.size
-                )
+                img = MRIFileUploaded(file=file, type=file.content_type, size=file.size)
 
             except ValidationError as e:
                 raise HTTPException(status_code=400, detail=str(e).splitlines()[2])
 
         elif is_type_PDF(file.content_type):
             try:
-                name = os.path.splitext(file.filename)[0]
                 pdf = ClinicHistoryFileUploaded(
-                    file=file, name=name, type=file.content_type, size=file.size
+                    file=file, type=file.content_type, size=file.size
                 )
 
             except ValidationError as e:

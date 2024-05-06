@@ -48,9 +48,9 @@ async def predict_tumor(
     pdf = None
 
     for file in files:
-        if file.filename.split(".")[0] == "brain_mri":
+        if file.filename.split(".")[1] in ["jpeg", "png", "jpg"]:
             img = file
-        elif file.filename.split(".")[0] == "clinical_history":
+        elif file.filename.split(".")[1] == "pdf":
             pdf = file
 
     # Call the function to predict the tumor
