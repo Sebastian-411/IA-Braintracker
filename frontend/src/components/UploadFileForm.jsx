@@ -6,8 +6,6 @@ function UploadFileForm({ handleFileUpload, notify, disabled }) {
 
     const pdfFiles = e.target.elements.pdf.files;
     const imgFiles = e.target.elements.img.files;
-    console.log(pdfFiles);
-    console.log(imgFiles);
 
     if (pdfFiles.length === 0 && imgFiles.length === 0) {
       notify("No ha seleccionado ningun archivo", "error");
@@ -51,7 +49,6 @@ function UploadFileForm({ handleFileUpload, notify, disabled }) {
             className="file-input file-input-bordered w-full max-w-xs my-4"
             id="pdf"
             name="pdf"
-            multiple
           />
           <label className="text-2xl font-semibold" htmlFor="img">
             Seleccione la IRM (cerebro)
@@ -61,7 +58,6 @@ function UploadFileForm({ handleFileUpload, notify, disabled }) {
             className="file-input file-input-bordered w-full max-w-xs my-4"
             id="img"
             name="img"
-            multiple
           />
 
           <button
