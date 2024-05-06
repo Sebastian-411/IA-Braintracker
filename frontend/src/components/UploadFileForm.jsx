@@ -21,11 +21,11 @@ function UploadFileForm({ handleFileUpload, notify, disabled }) {
     const formData = new FormData();
 
     for (let i = 0; i < pdfFiles.length; i++) {
-      formData.append("pdf", pdfFiles[i]);
+      formData.append("files", pdfFiles[i]);
     }
 
     for (let i = 0; i < imgFiles.length; i++) {
-      formData.append("img", imgFiles[i]);
+      formData.append("files", imgFiles[i]);
     }
 
     handleFileUpload(formData);
@@ -37,13 +37,13 @@ function UploadFileForm({ handleFileUpload, notify, disabled }) {
   return (
     <div className="pr-8">
       <form encType="multipart/form-data" onSubmit={submitHandler}>
-        {/* <p className="text-sm text-gray-500">
-          Formato esperado: clinical_history.pdf, brain_mri.jpeg
-        </p> */}
         <div className="flex flex-col ">
           <label className="text-2xl font-semibold" htmlFor="pdf">
             Seleccione la historia clínica
           </label>
+          <p className="text-sm text-gray-500">
+            Solo se aceptan pdf con tamaño inferior a 2MB
+          </p>
           <input
             type="file"
             className="file-input file-input-bordered w-full max-w-xs my-4"
@@ -53,6 +53,9 @@ function UploadFileForm({ handleFileUpload, notify, disabled }) {
           <label className="text-2xl font-semibold" htmlFor="img">
             Seleccione la IRM (cerebro)
           </label>
+          <p className="text-sm text-gray-500">
+            Solo se aceptan imágenes con tamaño inferior a 2MB
+          </p>
           <input
             type="file"
             className="file-input file-input-bordered w-full max-w-xs my-4"
