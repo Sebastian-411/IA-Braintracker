@@ -1,62 +1,66 @@
 import React from "react";
 
-function UploadFileForm({
-  handleFileUpload,
-  expectedFiles = ["clinical_history.pdf", "brain_mri.jpeg"],
-  notify,
-  disabled,
-}) {
+function UploadFileForm({ handleFileUpload, notify, disabled }) {
   const submitHandler = async (e) => {
     e.preventDefault();
-    const files = e.target.elements.file.files;
 
-    if (files.length === 0) {
-      notify("No hay archivos seleccionados", "error");
+    const pdfFiles = e.target.elements.pdf.files;
+    const imgFiles = e.target.elements.img.files;
+    console.log(pdfFiles);
+    console.log(imgFiles);
+
+    if (pdfFiles.length === 0 && imgFiles.length === 0) {
+      notify("No ha seleccionado ningun archivo", "error");
       return;
-    }
-
-    if (files.length !== expectedFiles.length) {
-      notify(
-        `Por favor, suba exactamente ${expectedFiles.length} archivos`,
-        "error",
-      );
+    } else if (pdfFiles.length === 0) {
+      notify("No ha seleccionado la historia clinica", "error");
       return;
-    }
-
-    const filenames = Array.from(files).map((file) => file.name);
-
-    if (
-      !expectedFiles.every((expectedFile) => filenames.includes(expectedFile))
-    ) {
-      notify("Los archivos no tienen el formato correcto", "error");
+    } else if (imgFiles.length === 0) {
+      notify("No ha seleccionado la IRM (cerebro)", "error");
       return;
     }
 
     const formData = new FormData();
 
-    for (let i = 0; i < expectedFiles.length; i++) {
-      formData.append("files", files[i]);
+    for (let i = 0; i < pdfFiles.length; i++) {
+      formData.append("pdf", pdfFiles[i]);
+    }
+
+    for (let i = 0; i < imgFiles.length; i++) {
+      formData.append("img", imgFiles[i]);
     }
 
     handleFileUpload(formData);
-    notify("Archivos enviados exitosamente. Procesando...");
+    notify(
+      "Archivos enviados exitosamente. Por favor no refresque la pagina...",
+    );
   };
-
+  // la IRM (cerebro)
   return (
     <div className="pr-8">
       <form encType="multipart/form-data" onSubmit={submitHandler}>
-        <label className="text-2xl font-semibold" htmlFor="file">
-          Seleccione la IRM (cerebro) e historia clínica:
-        </label>
-        <p className="text-sm text-gray-500">
+        {/* <p className="text-sm text-gray-500">
           Formato esperado: clinical_history.pdf, brain_mri.jpeg
-        </p>
+        </p> */}
         <div className="flex flex-col ">
+          <label className="text-2xl font-semibold" htmlFor="pdf">
+            Seleccione la historia clínica
+          </label>
           <input
             type="file"
             className="file-input file-input-bordered w-full max-w-xs my-4"
-            id="file"
-            name="file"
+            id="pdf"
+            name="pdf"
+            multiple
+          />
+          <label className="text-2xl font-semibold" htmlFor="img">
+            Seleccione la IRM (cerebro)
+          </label>
+          <input
+            type="file"
+            className="file-input file-input-bordered w-full max-w-xs my-4"
+            id="img"
+            name="img"
             multiple
           />
 
