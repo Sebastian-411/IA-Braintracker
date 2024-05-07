@@ -2,7 +2,7 @@ const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const uploadFiles = async (formData) => {
   try {
-    const response = await fetch(baseUrl, {
+    const response = await fetch(`${baseUrl}/v1/uploadfiles`, {
       method: "POST",
       body: formData,
     });
