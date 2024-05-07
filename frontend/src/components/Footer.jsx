@@ -62,7 +62,7 @@ function Footer() {
                 <strong>Consentimiento informado</strong>
               </dt>
               <dd>
-                Al cargar su IRM, da su consentimiento para el análisis de sus
+                Al cargar su  IRM, da su consentimiento para el análisis de sus
                 datos y entiende que la responsabilidad final de cualquier
                 decisión decisiones médicas recae en su médico o profesional
                 sanitario.
