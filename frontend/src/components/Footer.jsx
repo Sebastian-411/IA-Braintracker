@@ -3,7 +3,7 @@ import React from "react";
 function Footer() {
 
 
-  
+
   return (
     <footer className="footer p-4 bg-base-300 text-base-content">
       <p>
@@ -33,8 +33,8 @@ function Footer() {
                 <strong>Confidencialidad y privacidad</strong>
               </dt>
               <dd>
-                Este sitio web se compromete a proteger su privacidad. Todos los
-                datos cargados en los datos cargados se tratan con el máximo
+                Este sitio web se compromete a proteger su privacidad. 
+                Todos los datos cargados en los datos cargados se tratan con el máximo
                 nivel de confidencialidad y de acuerdo con la legislación de
                 protección de datos.
               </dd>
@@ -54,8 +54,8 @@ function Footer() {
                 <strong>Uso de los datos</strong>
               </dt>
               <dd>
-                Los datos cargados se utilizan exclusivamente para evaluar la
-                presencia de posibles tumores cerebrales mediante algoritmos de
+                Los datos cargados se utilizan exclusivamente para evaluar 
+                la presencia de posibles tumores cerebrales mediante algoritmos de
                 inteligencia artificial. No se comparten con terceros sin su
                 consentimiento explícito.
               </dd>
