@@ -1,6 +1,9 @@
 import React from "react";
 
 function Footer() {
+
+
+  
   return (
     <footer className="footer p-4 bg-base-300 text-base-content">
       <p>
