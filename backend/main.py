@@ -7,13 +7,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-FRONT_END_URL = "http://lb-medical-assistant-503996398.us-east-1.elb.amazonaws.com/"
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[FRONT_END_URL],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
