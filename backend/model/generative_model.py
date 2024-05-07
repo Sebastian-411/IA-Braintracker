@@ -16,4 +16,6 @@ class GenerativeModel:
             safety_settings=safety_settings,
             stream=False,
         )
+
+        
         return response.candidates[0].content.parts[0].text
