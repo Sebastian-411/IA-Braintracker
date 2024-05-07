@@ -5,7 +5,6 @@ from pydantic_core import PydanticCustomError
 
 
 class MRIFileUploaded(BaseModel):
-    name: Literal["brain_mri"]
     file: UploadFile
     type: Literal["image/jpeg", "image/png", "image/jpg"]
     size: int

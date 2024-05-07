@@ -5,7 +5,6 @@ from pydantic_core import PydanticCustomError
 
 
 class ClinicHistoryFileUploaded(BaseModel):
-    name: Literal["clinical_history"]
     file: UploadFile
     type: Literal["application/pdf"]
     size: Annotated[int, field_validator("size")]

@@ -5,7 +5,7 @@ const Notification = ({ notification }) => {
 
   if (notification.type === "error") {
     return (
-      <div role="alert" className="alert alert-error max-w-7xl m-auto">
+      <div role="alert" className="alert alert-error max-w-3xl m-auto">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="stroke-current shrink-0 h-6 w-6"
@@ -25,7 +25,7 @@ const Notification = ({ notification }) => {
   }
 
   return (
-    <div role="alert" className="alert alert-success max-w-7xl m-auto">
+    <div role="alert" className="alert alert-success max-w-3xl m-auto">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="stroke-current shrink-0 h-6 w-6"

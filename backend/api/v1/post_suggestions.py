@@ -4,7 +4,11 @@ from fastapi import APIRouter, Depends, UploadFile
 
 from controllers.v1.history_clinic import extract_text_from_pdf
 from controllers.v1.MRI_image import predict_tumor_by_img
-from controllers.v1.validate_files import processing_file_type_based
+from controllers.v1.validate_files import (
+    check_files,
+    type_based_checking,
+)
+
 
 from dotenv import load_dotenv
 from model import GenerativeModel
@@ -34,24 +38,22 @@ model_instance = GenerativeModel(model_name=model_LLM, key=GEMINI_API_KEY)
 
 
 @router.post(
-    "/files",
+    "/uploadfiles",
     status_code=200,
-    dependencies=[
-        Depends(processing_file_type_based),
-    ],
     response_model=dict[str, str],
+    dependencies=[Depends(check_files)],
 )
 async def predict_tumor(
     files: list[UploadFile],
 ):
-    img = None
-    pdf = None
+    # Check the type of the files pydantic model based
+    dict_files = {
+        file.filename.split(".")[1]: type_based_checking(file) for file in files
+    }
 
-    for file in files:
-        if file.filename.split(".")[0] == "brain_mri":
-            img = file
-        elif file.filename.split(".")[0] == "clinical_history":
-            pdf = file
+    # Get the image and the pdf
+    img = dict_files.get("jpeg") or dict_files.get("png") or dict_files.get("jpg")
+    pdf = dict_files.get("pdf")
 
     # Call the function to predict the tumor
     classification = await predict_tumor_by_img(img=img)
