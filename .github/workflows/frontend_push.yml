@@ -41,6 +41,7 @@ jobs:
         run: |
 
           echo VITE_BACKEND_URL=${{env.VITE_BACKEND_URL}} >> ./frontend/.env
+
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG ./frontend
 
           docker push $ECR_REPOSITORY:$IMAGE_TAG
