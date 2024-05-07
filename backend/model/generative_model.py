@@ -10,6 +10,8 @@ class GenerativeModel:
         genai.configure(api_key=self.key)
         gemini = genai.GenerativeModel(model_name=self.model_name)
 
+
+
         response = gemini.generate_content(
             content,
             generation_config=generation_config,
@@ -17,5 +19,5 @@ class GenerativeModel:
             stream=False,
         )
 
-        
+
         return response.candidates[0].content.parts[0].text
