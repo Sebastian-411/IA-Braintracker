@@ -13,7 +13,7 @@ env:
   ECS_SERVICE: medical_assistant_frontend
   ECR_REPOSITORY: 891377268337.dkr.ecr.us-east-1.amazonaws.com/medical_assistant_frontend
   API_KEY: ${{secrets.API_KEY}}
-  VITE_BACKEND_URL: http://lb-medical-assistant-503996398.us-east-1.elb.amazonaws.com:8000/
+  VITE_BACKEND_URL: http://lb-medical-assistant-503996398.us-east-1.elb.amazonaws.com:8000
 
 jobs:
   build_image_frontend:
