@@ -39,7 +39,7 @@ jobs:
           IMAGE_TAG: lastest
         run: |
 
-          echo API_KEY=${{env.API_KEY}} >> ./backend/.env
+          echo API_KEY=${{secrets.API_KEY}} >> ./backend/.env
           echo FRONTEND_URL=${{secrets.API_KEY}} >> ./backend/.env
 
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG ./backend
