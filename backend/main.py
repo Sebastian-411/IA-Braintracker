@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-FRONT_END_URL = os.getenv("FRONT_END_URL")
+FRONT_END_URL = "http://lb-medical-assistant-503996398.us-east-1.elb.amazonaws.com/"
 
 app = FastAPI()
 
