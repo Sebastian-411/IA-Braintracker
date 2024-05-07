@@ -6,10 +6,10 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
+
 FRONT_END_URL = os.getenv("FRONT_END_URL")
 
 app = FastAPI()
-app.include_router(v1_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -18,6 +18,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(v1_router)
 
 
 @app.get("/healthcheck")
