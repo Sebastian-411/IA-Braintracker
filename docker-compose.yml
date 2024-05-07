@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  backend:
+    build: ./backend
+    env_file:
+      - path: ./backend/.env
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app
+    restart: always
+    networks:
+      - message
+
+  frontend:
+    depends_on:
+      - backend
+    build:
+      ./frontend
+      # context: ./frontend
+      # dockerfile: Dockerfile.dev
+    env_file:
+      - path: ./frontend/.env
+    ports:
+      - 8080:80
+    volumes:
+      - ./frontend:/app
+    networks:
+      - message
+
+networks:
+  message:
+    driver: bridge
