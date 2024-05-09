@@ -4,6 +4,7 @@ services:
     build: ./backend
     env_file:
       - path: ./backend/.env
+        required: true
     ports:
       - 8000:8000
     volumes:
@@ -15,12 +16,10 @@ services:
   frontend:
     depends_on:
       - backend
-    build:
-      ./frontend
-      # context: ./frontend
-      # dockerfile: Dockerfile.dev
+    build: ./frontend
     env_file:
       - path: ./frontend/.env
+        required: true
     ports:
       - 8080:80
     volumes:
