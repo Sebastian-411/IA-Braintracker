@@ -64,7 +64,7 @@ function UploadFileForm({ handleFileUpload, notify, disabled }) {
           />
 
           <button
-            className="btn btn-primary w-2/3"
+            className="btn btn-primary max-w-xs"
             type="submit"
             disabled={disabled}
           >
