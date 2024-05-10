@@ -34,9 +34,7 @@ function App() {
   // The UploadFileWrapper component is used to render the form and the model's response data
   return (
     <div className="flex flex-col min-h-screen">
-      <h1 className="text-6xl font-bold p-6 m-auto">
-        Asistente de diagnóstico médico
-      </h1>
+      <h1 className="text-6xl font-bold p-6 m-auto">Braintracker</h1>
       <Notification notification={notification} />
       <main className="flex-1 flex max-w-7xl self-center pt-16 flex-col">
         <UploadFileWrapper
@@ -46,7 +44,7 @@ function App() {
           className="grow"
         />
         <div className="divider"></div>
-        <HealthRecommendations data={mockData} isLoading={isLoading} />
+        <HealthRecommendations data={healthData} isLoading={isLoading} />
       </main>
       <Footer />
     </div>
