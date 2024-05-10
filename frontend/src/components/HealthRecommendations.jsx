@@ -1,5 +1,6 @@
 import React from "react";
 import Markdown from "react-markdown";
+import { downloadPDF } from "../utils/downloadToPDF";
 
 function HealthRecommendations({ data, isLoading }) {
   if (isLoading) {
@@ -12,6 +13,14 @@ function HealthRecommendations({ data, isLoading }) {
 
   return (
     <div className="flex flex-col">
+      <button
+        onClick={() =>
+          downloadPDF(`${data.classification}\n\n${data.analysis_results}`)
+        }
+        className="btn btn-secondary w-1/3 self-center m-4"
+      >
+        Descargar PDF
+      </button>
       <p className="font-semibold text-xl max-w-xl my-4 italic">
         {data.classification}
       </p>

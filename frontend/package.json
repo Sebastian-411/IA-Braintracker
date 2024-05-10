@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "html-to-text": "^9.0.5",
+    "markdown-it": "^14.1.0",
+    "pdfmake": "^0.2.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
