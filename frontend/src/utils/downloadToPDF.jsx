@@ -2,10 +2,20 @@ import React from "react";
 import { htmlToText } from "html-to-text";
 import MarkdownIt from "markdown-it";
 import pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "../utils/vfs_fonts";
 
 export const downloadPDF = (markdownString) => {
-  pdfMake.vfs = pdfFonts.default;
+  pdfMake.fonts = {
+    Roboto: {
+      normal:
+        "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf",
+      bold: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf",
+      italics:
+        "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf",
+      bolditalics:
+        "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf",
+    },
+  };
+
   const md = new MarkdownIt();
   const htmlString = md.render(markdownString);
   const textString = htmlToText(htmlString, {
