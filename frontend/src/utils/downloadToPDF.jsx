@@ -2,10 +2,10 @@ import React from "react";
 import { htmlToText } from "html-to-text";
 import MarkdownIt from "markdown-it";
 import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import * as pdfFonts from "../utils/vfs_fonts";
 
 export const downloadPDF = (markdownString) => {
-  pdfMake.vfs = pdfFonts.pdfMake.vfs;
+  pdfMake.vfs = pdfFonts.default;
   const md = new MarkdownIt();
   const htmlString = md.render(markdownString);
   const textString = htmlToText(htmlString, {
